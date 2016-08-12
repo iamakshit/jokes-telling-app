@@ -53,7 +53,7 @@ public class MainActivity extends ActionBarActivity {
             e.printStackTrace();
         }
         Intent intent = new Intent(this, MainlibActivity.class);
-        intent.putExtra("keyName","value");
+        intent.putExtra("key",text);
         startActivity(intent);
     }
 
