@@ -1,5 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+//import com.example.akshitgupta.jokeddisplaylibrary.MainlibActivity;
 import com.jokes.JokesGenerator;
 
 
@@ -45,6 +47,14 @@ public class MainActivity extends ActionBarActivity {
 
         String text = JokesGenerator.generateRandomJokes();
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //Intent intent = new Intent(this, MainlibActivity.class);
+      //  intent.putExtra("keyName","value");
+     //   startActivity(intent);
     }
 
 
