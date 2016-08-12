@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-//import com.example.akshitgupta.jokeddisplaylibrary.MainlibActivity;
+import com.example.akshitgupta.jokeddisplaylibrary.MainlibActivity;
 import com.jokes.JokesGenerator;
 
 
@@ -52,9 +52,9 @@ public class MainActivity extends ActionBarActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //Intent intent = new Intent(this, MainlibActivity.class);
-      //  intent.putExtra("keyName","value");
-     //   startActivity(intent);
+        Intent intent = new Intent(this, MainlibActivity.class);
+        intent.putExtra("keyName","value");
+        startActivity(intent);
     }
 
 
