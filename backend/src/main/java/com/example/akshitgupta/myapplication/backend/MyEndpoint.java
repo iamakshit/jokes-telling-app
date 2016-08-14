@@ -9,6 +9,7 @@ package com.example.akshitgupta.myapplication.backend;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.jokes.JokesGenerator;
 
 import javax.inject.Named;
 
@@ -28,7 +29,8 @@ public class MyEndpoint {
     @ApiMethod(name = "sayHi")
     public MyBean sayHi(@Named("name") String name) {
         MyBean response = new MyBean();
-        response.setData("Hi, " + name);
+        String text = JokesGenerator.generateRandomJokes();
+        response.setData(text);
 
         return response;
     }

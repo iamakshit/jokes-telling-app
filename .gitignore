@@ -5,3 +5,7 @@
 .DS_Store
 /build
 /captures
+/backend/build
+app/app.iml
+backend/backend.iml
+backend/build/

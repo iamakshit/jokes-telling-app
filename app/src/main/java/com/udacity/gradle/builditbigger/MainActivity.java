@@ -13,6 +13,8 @@ import android.util.Pair;
 import com.example.akshitgupta.jokeddisplaylibrary.MainlibActivity;
 import com.jokes.JokesGenerator;
 
+import java.util.concurrent.ExecutionException;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -20,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
+
     }
 
 
@@ -48,7 +50,17 @@ public class MainActivity extends ActionBarActivity {
 
     public void tellJoke(View view){
 
-        String text = JokesGenerator.generateRandomJokes();
+        EndpointsAsyncTask task =  new EndpointsAsyncTask();
+        task.execute(new Pair<Context, String>(this, "Manfred"));
+        String text = null;
+        try {
+            text = task.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+      //  String text = JokesGenerator.generateRandomJokes();
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
         try {
             Thread.sleep(1000);
