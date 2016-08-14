@@ -3,10 +3,13 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.util.Pair;
 
@@ -17,11 +20,16 @@ import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends ActionBarActivity {
+    private ProgressBar spinner;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        button = (Button) findViewById(R.id.button);
+        spinner = (ProgressBar) findViewById(R.id.progressBar);
+        spinner.setVisibility(View.GONE);
 
     }
 
@@ -48,9 +56,16 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view){
+    public void tellJoke(View view) {
+        spinner.setVisibility(View.VISIBLE);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                spinner.setVisibility(View.INVISIBLE);
+            }
+        }, 3000);
 
-        EndpointsAsyncTask task =  new EndpointsAsyncTask();
+        EndpointsAsyncTask task = new EndpointsAsyncTask();
         task.execute(new Pair<Context, String>(this, "Manfred"));
         String text = null;
         try {
@@ -60,7 +75,7 @@ public class MainActivity extends ActionBarActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-      //  String text = JokesGenerator.generateRandomJokes();
+        //  String text = JokesGenerator.generateRandomJokes();
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
         try {
             Thread.sleep(1000);
@@ -68,7 +83,7 @@ public class MainActivity extends ActionBarActivity {
             e.printStackTrace();
         }
         Intent intent = new Intent(this, MainlibActivity.class);
-        intent.putExtra("key",text);
+        intent.putExtra("key", text);
         startActivity(intent);
     }
 
