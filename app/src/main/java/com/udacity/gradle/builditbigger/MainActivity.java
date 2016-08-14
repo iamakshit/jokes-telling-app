@@ -12,10 +12,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.util.Pair;
-
 import com.example.akshitgupta.jokeddisplaylibrary.MainlibActivity;
-import com.jokes.JokesGenerator;
-
 import java.util.concurrent.ExecutionException;
 
 
@@ -30,9 +27,7 @@ public class MainActivity extends ActionBarActivity {
         button = (Button) findViewById(R.id.button);
         spinner = (ProgressBar) findViewById(R.id.progressBar);
         spinner.setVisibility(View.GONE);
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,8 +70,7 @@ public class MainActivity extends ActionBarActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        //  String text = JokesGenerator.generateRandomJokes();
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -86,6 +80,4 @@ public class MainActivity extends ActionBarActivity {
         intent.putExtra("key", text);
         startActivity(intent);
     }
-
-
 }

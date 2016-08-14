@@ -31,7 +31,6 @@ public class MyEndpoint {
         MyBean response = new MyBean();
         String text = JokesGenerator.generateRandomJokes();
         response.setData(text);
-
         return response;
     }
 

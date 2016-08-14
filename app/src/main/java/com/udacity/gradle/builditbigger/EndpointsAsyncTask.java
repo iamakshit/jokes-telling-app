@@ -25,10 +25,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
                     .setRootUrl("https://jokesapp-backend-140308.appspot.com/_ah/api/");
-
-            // end options for devappserver
-
-            myApiService = builder.build();
+          myApiService = builder.build();
         }
 
         context = params[0].first;
