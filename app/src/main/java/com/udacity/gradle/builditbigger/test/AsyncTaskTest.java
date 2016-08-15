@@ -18,18 +18,14 @@ public class AsyncTaskTest extends AndroidTestCase {
     @Test
     public void verifyAsyncTaskResponse() {
 
-        EndpointsAsyncTask task = new EndpointsAsyncTask();
+        EndpointsAsyncTask task = new EndpointsAsyncTask(new EndpointsAsyncTask.TaskListener() {
+            @Override
+            public void onFinished(String result) {
+                assertFalse("Async Task is producing empty string", result.length() == 0);
+
+            }
+        });
+
         task.execute(new Pair<Context, String>(getContext(), "Manfred"));
-        String text = null;
-        try {
-            text = task.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-
-        assertFalse("Async Task is producing empty string", text.length() == 0);
     }
 }

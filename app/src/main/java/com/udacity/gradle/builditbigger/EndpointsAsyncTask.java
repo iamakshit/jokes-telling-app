@@ -19,6 +19,18 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
     private static MyApi myApiService = null;
     private Context context;
 
+    public interface TaskListener {
+        public void onFinished(String result);
+    }
+
+    // This is the reference to the associated listener
+    private final TaskListener taskListener;
+
+    public EndpointsAsyncTask(TaskListener listener) {
+        // The listener reference is passed in through the constructor
+        this.taskListener = listener;
+    }
+
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
         if(myApiService == null) {  // Only do this once
@@ -41,5 +53,10 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
     @Override
     protected void onPostExecute(String result) {
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        // In onPostExecute we check if the listener is valid
+        if(this.taskListener != null) {
+            // And if it is we call the callback function on it.
+            this.taskListener.onFinished(result);
+        }
     }
 }

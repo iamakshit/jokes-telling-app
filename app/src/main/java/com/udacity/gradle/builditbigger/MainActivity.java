@@ -59,25 +59,16 @@ public class MainActivity extends ActionBarActivity {
                 spinner.setVisibility(View.INVISIBLE);
             }
         }, 3000);
+        final Intent intent = new Intent(this, MainlibActivity.class);
 
-        EndpointsAsyncTask task = new EndpointsAsyncTask();
+        EndpointsAsyncTask task = new EndpointsAsyncTask(new EndpointsAsyncTask.TaskListener() {
+            @Override
+            public void onFinished(String result) {
+                intent.putExtra("key", result);
+                startActivity(intent);
+            }
+        });
         task.execute(new Pair<Context, String>(this, "Manfred"));
-        String text = null;
-        try {
-            text = task.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Intent intent = new Intent(this, MainlibActivity.class);
-        intent.putExtra("key", text);
-        startActivity(intent);
     }
 }
